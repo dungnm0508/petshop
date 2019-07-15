@@ -64,7 +64,7 @@
 					<button type="submit" class="btn btn-primary btn-sm" id="btn-submit">
 						<i class="fa fa-dot-circle-o"></i> Thêm
 					</button>
-					<button type="reset" class="btn btn-danger btn-sm">
+					<button type="reset" class="btn btn-danger btn-sm" id="btn-reset">
 						<i class="fa fa-ban"></i> Reset
 					</button>
 				</div>
@@ -95,8 +95,8 @@
 								<td>{{$product->type}}</td>
 								<td>{{$product->price}}</td>
 								<td>{{$product->weight}}</td>
-								<td><button class="btn btn-primary">Sửa</button></td>
-								<td><button class="btn btn-success">Xóa</button></td>
+								<td><button class="btn btn-primary" data-id="{{$product->id}}">Sửa</button></td>
+								<td><button class="btn btn-success btnDeleteProduct" data-id="{{$product->id}}">Xóa</button></td>
 							</tr>
 							@endforeach
 						</tbody>
@@ -106,6 +106,7 @@
 		</div>
 	</div>
 </div>
+
 
 @endsection
 
@@ -166,8 +167,41 @@
 				var messageText = "Vui lòng không để trống trường!";
 				messageResponce(messageText,'error');
 			}
-		})
+		});
 
+		jQuery('.btnDeleteProduct').on('click',function(){
+			var productId = jQuery('.btnDeleteProduct').attr('data-id');
+			var txt;
+			var r = confirm("Bạn chắc chắn muốn xóa!");
+			if (r == true) {
+				jQuery.ajax({
+					url: host+'/admin/deleteProduct',
+					method:'post',
+					data: {
+						_token: CSRF_TOKEN,
+						productId:productId
+					},
+					dataType: 'JSON',
+					success:function(res){
+						console.log(res.message);
+						setTimeout(function() {
+							location.reload()
+						},500);
+					}
+
+				});
+			}
+			
+		});
+		jQuery('#btn-reset').on('click',function(){
+			$('#nameProduct').val('');
+			$('#priceProduct').val('');
+			$('#weightProduct').val('');
+			$('.bootstrap-tagsinput .label-info').each(function(key,value){
+				$(value).remove()
+			});
+			$('#textareaInput').val('');
+		});
 	});
 
 	function checkEmptyInput(){

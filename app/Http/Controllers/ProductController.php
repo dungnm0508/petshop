@@ -23,4 +23,9 @@ class ProductController extends Controller
    		$product->save();
    		return ['message'=>'Thêm sản phẩm thành công!'];
    	}
+      public function postDeleteProduct(Request $request){
+         $product = Product::find($request->productId);
+         $product->delete();
+         return ['message'=>'Xóa sản phẩm thành công!'];
+      }
 }

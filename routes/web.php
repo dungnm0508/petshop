@@ -35,4 +35,6 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::post('insertProduct',['as'=>'postInsertProduct','uses'=>'ProductController@postInsertProduct']);
 
+    Route::post('deleteProduct',['as'=>'postDeleteProduct','uses'=>'ProductController@postDeleteProduct']);
+
 });

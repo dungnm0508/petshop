@@ -1,0 +1,173 @@
+@extends('layouts.master')
+
+@section('css')
+<link rel="stylesheet" href="{{asset('app/assets/css/lib/datatable/dataTables.bootstrap.min.css')}}">
+<style type="text/css">
+	.bootstrap-tagsinput .tag{
+		margin-right: 2px;
+		color: #fff;
+		background-color: #477aca;
+		padding: 2px;
+		border-radius: 1px;
+		padding-left: 10px;
+		padding-right: 5px;
+	}
+	.bootstrap-tagsinput{
+		display: block;
+	}
+	..card .card-footer{
+		text-align: center;
+	}
+</style>
+
+@endsection
+@section('content')
+
+<div class="animated fadeIn">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card ">
+				<div class="card-header">
+					<strong>Add</strong> Product
+				</div>
+				<div class="card-body card-block " >
+					<form action="" method="post" >
+						<meta name="csrf-token" content="{{ csrf_token() }}" />
+						<div class="row">
+							<div class="form-group col-lg-4">
+								<label for="exampleInputName2" class="pr-1  form-control-label">Tên</label>
+								<input type="text" id="nameProduct"  required class="form-control">
+							</div>
+							<div class="form-group col-lg-4">
+								<label for="exampleInputEmail2" class="px-1  form-control-label">Loại</label>
+								<input type="text" data-role="tagsinput" class="form-control"/>
+							</div>
+							<div class="form-group col-lg-4">
+								<label for="exampleInputEmail2" class="px-1  form-control-label">Giá</label>
+								<input type="text" id="priceProduct" required class="form-control">
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-lg-4">
+								<label for="exampleInputEmail2" class="px-1  form-control-label">Khối lượng</label>
+								<input type="text" id="weightProduct"  required class="form-control">
+							</div>
+							<div class="form-group col-lg-8">
+								<label for="exampleInputEmail2" class="px-1  form-control-label">Mô tả</label>
+								<textarea name="textarea-input" id="textarea-input" rows="1" placeholder="Nội dung..." class="form-control"></textarea>
+							</div>
+						</div>
+						
+					</form>
+				</div>
+				<div class="card-footer">
+					<button type="submit" class="btn btn-primary btn-sm" id="btn-submit">
+						<i class="fa fa-dot-circle-o"></i> Thêm
+					</button>
+					<button type="reset" class="btn btn-danger btn-sm">
+						<i class="fa fa-ban"></i> Reset
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-header">
+					<strong class="card-title">Data Table</strong>
+				</div>
+				<div class="card-body">
+					<table id="bootstrap-data-table" class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Tên sản phẩm</th>
+								<th>Loại sản phẩm</th>
+								<th>Giá</th>
+								<th>Khối lượng</th>
+								<th>Sửa</th>
+								<th>Xóa</th>
+								<
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($products as $product)
+							<tr>
+								<td>{{$product->name}}</td>
+								<td>{{$product->type}}</td>
+								<td>{{$product->price}}</td>
+								<td>{{$product->weight}}</td>
+								<td><button class="btn btn-primary">Sửa</button></td>
+								<td><button class="btn btn-success">Xóa</button></td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@endsection
+
+@section('script')
+<script src="{{asset('app/assets/js/lib/data-table/datatables.min.js')}}"></script>
+<script src="{{asset('app/assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('app/assets/js/lib/data-table/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('app/assets/js/lib/data-table/buttons.bootstrap.min.js')}}"></script>
+<script src="{{asset('app/assets/js/lib/data-table/jszip.min.js')}}"></script>
+<script src="{{asset('app/assets/js/lib/data-table/pdfmake.min.js')}}"></script>
+<script src="{{asset('app/assets/js/lib/data-table/vfs_fonts.js')}}"></script>
+<script src="{{asset('app/assets/js/lib/data-table/buttons.html5.min.js')}}"></script>
+<script src="{{asset('app/assets/js/lib/data-table/buttons.print.min.js')}}"></script>
+<script src="{{asset('app/assets/js/lib/data-table/buttons.colVis.min.js')}}"></script>
+<script src="{{asset('app/assets/js/lib/data-table/datatables-init.js')}}"></script>
+
+<script type="text/javascript">
+	
+
+	$(document).ready(function() {
+		$('#btn-submit').on('click',function(){
+			console.log('check: ',checkEmptyInput());
+		})
+
+	});
+	function checkEmptyInput(){
+		var valName = $('#nameProduct').val();
+		var valPrice = $('#priceProduct').val();
+		var valWeight = $('#weightProduct').val();
+
+		if(!valName || !valPrice || !valWeight ){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	function messageResponce(message,type){
+		if(type == 'error'){
+			$.bootstrapGrowl(message, {
+				type: 'danger',
+				align: 'center',
+				width: 'auto',
+				allow_dismiss: false
+			});
+		}else if(type == 'info'){
+			$.bootstrapGrowl(message, {
+				type: 'info',
+				align: 'center',
+				width: 'auto',
+				allow_dismiss: false
+			});
+		}else if(type == 'success'){
+			$.bootstrapGrowl(message, {
+				type: 'success',
+				align: 'center',
+				width: 'auto',
+				allow_dismiss: false
+			});
+
+		}
+
+
+	}
+</script>
+@endsection

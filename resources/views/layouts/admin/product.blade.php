@@ -40,7 +40,7 @@
 							</div>
 							<div class="form-group col-lg-4">
 								<label for="exampleInputEmail2" class="px-1  form-control-label">Loại</label>
-								<input type="text" data-role="tagsinput" class="form-control"/>
+								<input type="text" data-role="tagsinput" id="productType" class="form-control"/>
 							</div>
 							<div class="form-group col-lg-4">
 								<label for="exampleInputEmail2" class="px-1  form-control-label">Giá</label>
@@ -54,7 +54,7 @@
 							</div>
 							<div class="form-group col-lg-8">
 								<label for="exampleInputEmail2" class="px-1  form-control-label">Mô tả</label>
-								<textarea name="textarea-input" id="textarea-input" rows="1" placeholder="Nội dung..." class="form-control"></textarea>
+								<textarea name="textarea-input" id="textareaInput" rows="1" placeholder="Nội dung..." class="form-control"></textarea>
 							</div>
 						</div>
 						
@@ -126,11 +126,50 @@
 	
 
 	$(document).ready(function() {
+		var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+		var host = location.origin;
+		
 		$('#btn-submit').on('click',function(){
-			console.log('check: ',checkEmptyInput());
+			if(checkEmptyInput()){
+				var valName = $('#nameProduct').val();
+				var valPrice = $('#priceProduct').val();
+				var valWeight = $('#weightProduct').val();
+				var valType = $('#productType').val();
+				var valDes = $('#textareaInput').val();
+
+				var dataPost= {
+					name:valName,
+					price:valPrice,
+					type:valType,
+					weight:valWeight,
+					description:valDes,
+				};
+
+
+				jQuery.ajax({
+					url: host+'/admin/insertProduct',
+					method:'post',
+					data: {
+						_token: CSRF_TOKEN,
+						dataPost:dataPost
+					},
+					dataType: 'JSON',
+					success:function(res){
+						console.log(res.message);
+						setTimeout(function() {
+							location.reload()
+						},500);
+					}
+
+				});
+			}else{
+				var messageText = "Vui lòng không để trống trường!";
+				messageResponce(messageText,'error');
+			}
 		})
 
 	});
+
 	function checkEmptyInput(){
 		var valName = $('#nameProduct').val();
 		var valPrice = $('#priceProduct').val();

@@ -304,7 +304,6 @@
     <script src="{{asset('app/assets/js/plugins.js')}}"></script>
     <script src="{{asset('app/assets/js/main.js')}}"></script>
     <script src="{{asset('js/bootstrap-tagsinput.js')}}"></script>
-    <script src="{{asset('js/jquery.bootstrap-growl.min.js')}}"></script>
 
 
     <!-- <script src="{{asset('app/assets/js/lib/chart-js/Chart.bundle.js')}}"></script> -->
@@ -314,6 +313,8 @@
     <!-- <script src="{{asset('app/assets/js/lib/vector-map/jquery.vmap.min.js')}}"></script> -->
     <script src="{{asset('app/assets/js/lib/vector-map/jquery.vmap.sampledata.js')}}"></script>
     <!-- <script src="{{asset('app/assets/js/lib/vector-map/country/jquery.vmap.world.js')}}"></script> -->
+    <!-- <script src="{{asset('js/vendor/jquery.bootstrap-growl.min.js')}}"></script> -->
+    <script src="{{asset('js/vendor/jquery.bootstrap-growl.js')}}"></script>
     <script>
         // ( function ( $ ) {
         //     "use strict";

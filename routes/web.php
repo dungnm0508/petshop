@@ -32,4 +32,7 @@ Route::get('dashboard',['as'=>'getDashboard','uses'=>'StatisticController@getDas
 
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('products',['as'=>'getProduct','uses'=>'ProductController@getProduct']);
+
+    Route::post('insertProduct',['as'=>'postInsertProduct','uses'=>'ProductController@postInsertProduct']);
+
 });

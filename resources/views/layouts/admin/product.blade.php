@@ -15,12 +15,13 @@
 	.bootstrap-tagsinput{
 		display: block;
 	}
-	..card .card-footer{
+	.card .card-footer{
 		text-align: center;
 	}
 </style>
 
 @endsection
+@section('page', 'Sản phẩm')
 @section('content')
 
 <div class="animated fadeIn">

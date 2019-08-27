@@ -28,6 +28,9 @@ Route::get('logout',['as'=>'getLogout','uses'=>'AuthController@getLogout']);
 
 Route::get('dashboard',['as'=>'getDashboard','uses'=>'StatisticController@getDashboard'])->middleware('auth');
 
+
+Route::get('test',['uses'=>'ProductController@getProductTest']);
+
 //admin 
 
 Route::middleware('auth')->prefix('admin')->group(function () {

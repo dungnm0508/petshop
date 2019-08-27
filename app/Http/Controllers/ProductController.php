@@ -30,6 +30,9 @@ class ProductController extends Controller
          $products =  Product::all();
          echo 123;die;
 
+
+
+
          
          return $products;
       }

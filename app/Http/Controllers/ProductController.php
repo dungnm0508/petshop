@@ -29,6 +29,8 @@ class ProductController extends Controller
       public function getProductTest(){
          $products =  Product::all();
          echo 123;die;
+
+         
          return $products;
       }
 }

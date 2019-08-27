@@ -28,6 +28,10 @@ class ProductController extends Controller
       }
       public function getProductTest(){
          $products =  Product::all();
+
+
+
+         
          return $products;
       }
 }

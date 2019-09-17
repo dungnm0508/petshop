@@ -28,7 +28,16 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     @yield('css')
-
+    <style type="text/css">
+        .notify{
+            position: absolute;
+            top: 0px;
+            left: 40%;
+        } 
+        .notify .sufee-alert{
+            display: none;
+        }
+    </style>
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
@@ -57,7 +66,7 @@
                         <a href="{{route('getProduct')}}"> <i class="menu-icon fa fa-table"></i>Sản phẩm</a>
                     </li>
                     <li class="active">
-                        <a href="{{route('getDashboard')}}"> <i class="menu-icon fa fa-tasks"></i>Đơn hàng </a>
+                        <a href="{{route('getOrder')}}"> <i class="menu-icon fa fa-tasks"></i>Đơn hàng </a>
                     </li>
                     <!-- <h3 class="menu-title">UI elements</h3><!-- /.menu-title --> -->
                     <!-- <li class="menu-item-has-children dropdown">
@@ -248,7 +257,6 @@
         </div>
 
         <div class="content mt-3">
-
             <!-- <div class="col-sm-12">
                 <div class="alert  alert-success alert-dismissible fade show" role="alert">
                   <span class="badge badge-pill badge-success">Success</span> You successfully read this important alert message.
@@ -259,17 +267,61 @@
             </div> -->
 
             @yield('content')
-           
+            <div class="notify " style="position: absolute;top: 0px;left: 40%;">
+                <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                    <span class="badge badge-pill badge-success">Success</span>
+                    <span class="message-text"></span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                    <span class="badge badge-pill badge-danger">Error</span>
+                    <span class="message-text"></span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="sufee-alert alert with-close alert-warning alert-dismissible fade show">
+                    <span class="badge badge-pill badge-warning">Warning</span>
+                    <span class="message-text"></span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+
 
          
 
 
         </div> <!-- .content -->
     </div><!-- /#right-panel -->
-
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+</div>
     <!-- Right Panel -->
 
     <script src="{{asset('app/assets/js/vendor/jquery-2.1.4.min.js')}}"></script>
+    <!-- <script src="//code.jquery.com/jquery.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="{{asset('app/assets/js/plugins.js')}}"></script>
     <script src="{{asset('app/assets/js/main.js')}}"></script>
@@ -285,6 +337,9 @@
     <!-- <script src="{{asset('app/assets/js/lib/vector-map/country/jquery.vmap.world.js')}}"></script> -->
     <!-- <script src="{{asset('js/vendor/jquery.bootstrap-growl.min.js')}}"></script> -->
     <script src="{{asset('js/vendor/jquery.bootstrap-growl.js')}}"></script>
+    <script src="{{asset('js/vendor/notify.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   
     <script>
         // ( function ( $ ) {
         //     "use strict";

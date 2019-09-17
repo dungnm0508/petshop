@@ -42,4 +42,6 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::get('orders',['as'=>'getOrder','uses'=>'OrderController@getOrder']);
 
+    Route::post('insertOrder',['as'=>'postInsertOrder','uses'=>'OrderController@postInsertOrder']);
+
 });

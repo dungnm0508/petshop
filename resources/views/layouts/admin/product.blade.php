@@ -24,7 +24,8 @@
 @section('page', 'Sản phẩm')
 @section('content')
 
-<div class="animated fadeIn">
+<div class="animated fadeIn" id="product-app">
+
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card ">
@@ -91,12 +92,12 @@
 						</thead>
 						<tbody>
 							@foreach($products as $product)
-							<tr>
-								<td>{{$product->name}}</td>
-								<td>{{$product->type}}</td>
-								<td>{{$product->price}}</td>
-								<td>{{$product->weight}}</td>
-								<td><button class="btn btn-primary" data-id="{{$product->id}}">Sửa</button></td>
+							<tr data-id="{{$product->id}}">
+								<td class="nameCol">{{$product->name}}</td>
+								<td class="typeCol">{{$product->type_product}}</td>
+								<td class="priceCol">{{$product->price}}</td>
+								<td class="weightCol">{{$product->weight}}</td>
+								<td><button class="btn btn-primary"  data-product ="{{$product}}" v-on:click="editProduct">Sửa</button></td>
 								<td><button class="btn btn-success btnDeleteProduct" data-id="{{$product->id}}">Xóa</button></td>
 							</tr>
 							@endforeach
@@ -109,9 +110,11 @@
 </div>
 
 
+
 @endsection
 
 @section('script')
+
 <script src="{{asset('app/assets/js/lib/data-table/datatables.min.js')}}"></script>
 <script src="{{asset('app/assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
 <script src="{{asset('app/assets/js/lib/data-table/dataTables.buttons.min.js')}}"></script>
@@ -217,31 +220,28 @@
 		}
 	}
 	function messageResponce(message,type){
-		if(type == 'error'){
-			$.bootstrapGrowl(message, {
-				type: 'danger',
-				align: 'center',
-				width: 'auto',
-				allow_dismiss: false
-			});
-		}else if(type == 'info'){
-			$.bootstrapGrowl(message, {
-				type: 'info',
-				align: 'center',
-				width: 'auto',
-				allow_dismiss: false
-			});
-		}else if(type == 'success'){
-			$.bootstrapGrowl(message, {
-				type: 'success',
-				align: 'center',
-				width: 'auto',
-				allow_dismiss: false
-			});
-
-		}
-
-
+		jQuery( document ).ready(function() {
+			if(type == 'error'){
+				$('.alert-danger').fadeIn();
+				$('.alert-danger .message-text').text(message);
+				setTimeout(function(){
+					$('.alert-danger').fadeOut();
+				},2000)
+			}else if(type == 'info'){
+				$('.alert-warning').fadeIn();
+				$('.alert-warning .message-text').text(message);
+				setTimeout(function(){
+					$('.alert-warning').fadeOut();
+				},2000)
+			}else if(type == 'success'){
+				$('.alert-success').fadeIn();
+				$('.alert-success .message-text').text(message);
+				setTimeout(function(){
+					$('.alert-success').fadeOut();
+				},2000)
+			}
+		});
 	}
 </script>
+<script type="text/javascript" src="{{asset('js/vuejs/product.js')}}"></script>
 @endsection

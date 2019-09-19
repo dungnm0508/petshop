@@ -20,9 +20,15 @@ class OrderController extends Controller
     	$order->distribution = $request->dataPost['distribute'];
     	$order->code = $request->dataPost['code'];
     	$order->total_price = $request->dataPost['price'];
+    	$order->time_created = $request->dataPost['timeCreate'];
     	$order->product_data= json_encode($request->dataPost['productData']);
     	$order->created_at = new Datetime;
     	$order->save();
     	return ['message'=>'Thêm đơn hàng thành công!'];
+    }
+    public function postDeleteOrder(Request $request){
+    	$order = Order::find($request->productId);
+    	$order->delete();
+    	return ['message'=>'Xóa sản phẩm thành công!'];
     }
 }

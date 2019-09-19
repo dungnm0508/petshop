@@ -40,6 +40,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::post('deleteProduct',['as'=>'postDeleteProduct','uses'=>'ProductController@postDeleteProduct']);
 
+    Route::post('deleteOrder',['as'=>'postDeleteOrder','uses'=>'OrderController@postDeleteOrder']);
+
     Route::get('orders',['as'=>'getOrder','uses'=>'OrderController@getOrder']);
 
     Route::post('insertOrder',['as'=>'postInsertOrder','uses'=>'OrderController@postInsertOrder']);

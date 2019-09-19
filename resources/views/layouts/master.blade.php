@@ -333,12 +333,12 @@
     <!-- <script src="{{asset('app/assets/js/widgets.js')}}"></script> -->
     <!-- <script src="{{asset('app/assets/js/lib/vector-map/jquery.vmap.js')}}"></script> -->
     <!-- <script src="{{asset('app/assets/js/lib/vector-map/jquery.vmap.min.js')}}"></script> -->
-    <script src="{{asset('app/assets/js/lib/vector-map/jquery.vmap.sampledata.js')}}"></script>
+    <!-- <script src="{{asset('app/assets/js/lib/vector-map/jquery.vmap.sampledata.js')}}"></script> -->
     <!-- <script src="{{asset('app/assets/js/lib/vector-map/country/jquery.vmap.world.js')}}"></script> -->
     <!-- <script src="{{asset('js/vendor/jquery.bootstrap-growl.min.js')}}"></script> -->
     <script src="{{asset('js/vendor/jquery.bootstrap-growl.js')}}"></script>
     <script src="{{asset('js/vendor/notify.min.js')}}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
    
     <script>
         // ( function ( $ ) {

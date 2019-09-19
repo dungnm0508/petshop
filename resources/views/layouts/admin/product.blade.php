@@ -24,7 +24,7 @@
 @section('page', 'Sản phẩm')
 @section('content')
 
-<div class="animated fadeIn" id="product-app">
+<div class="animated fadeIn" >
 
 	<div class="row">
 		<div class="col-lg-12">
@@ -85,9 +85,8 @@
 								<th>Loại sản phẩm</th>
 								<th>Giá</th>
 								<th>Khối lượng</th>
-								<th>Sửa</th>
 								<th>Xóa</th>
-								<
+								
 							</tr>
 						</thead>
 						<tbody>
@@ -97,7 +96,6 @@
 								<td class="typeCol">{{$product->type_product}}</td>
 								<td class="priceCol">{{$product->price}}</td>
 								<td class="weightCol">{{$product->weight}}</td>
-								<td><button class="btn btn-primary"  data-product ="{{$product}}" v-on:click="editProduct">Sửa</button></td>
 								<td><button class="btn btn-success btnDeleteProduct" data-id="{{$product->id}}">Xóa</button></td>
 							</tr>
 							@endforeach

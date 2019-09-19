@@ -8,9 +8,9 @@
 
 
 
-    $('#bootstrap-data-table').DataTable({
-        lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
-    });
+    // $('#bootstrap-data-table').DataTable({
+    //     lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
+    // });
    
 
     $('#bootstrap-data-table-export').DataTable({
@@ -21,7 +21,7 @@
         ]
     });
 	
-	$('#row-select').DataTable( {
+	$('#bootstrap-data-table').DataTable( {
 			initComplete: function () {
 				this.api().columns().every( function () {
 					var column = this;

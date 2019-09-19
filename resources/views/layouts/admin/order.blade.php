@@ -73,6 +73,7 @@
 										<option value="shopee">Shopee</option>
 										<option value="Nông Nghiệp">Nông Nghiệp</option>
 										<option value="Sơn Tây">Sơn Tây</option>
+										<option value="Facebook">Facebook</option>
 										<option value="Khác">Khác</option>
 									</select>
 								</div>
@@ -93,6 +94,14 @@
 								</div>
 								<div class="col-12 col-md-9">
 									<input type="number" id="totalPrice" placeholder="148" class="form-control" required>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="col col-md-3">
+									<label for="vat" class=" form-control-label">Ngày lập đơn</label>
+								</div>
+								<div class="col-12 col-md-9">
+									<input type="date" id="timeCreate" placeholder="19/9/2019" class="form-control">
 								</div>
 							</div>
 						</div>
@@ -123,7 +132,7 @@
 								<th>Thành tiền</th>
 								<th>Mã đơn hàng</th>
 								<th>Thời gian tạo</th>
-								<
+								<th>Xóa</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -137,7 +146,7 @@
 											echo '<strong>'.$value['productName'].'</strong> - sl: '.$value['quantity'].'<br>';
 										}
 									}else{
-										echo '<strong>'.$product_data[0]['productName'].'</strong> - sl: '.$product_data[0]['quantity'];
+										echo '<strong>'.$product_data[0]['productName'].'</strong> - số lượng: '.$product_data[0]['quantity'];
 									}
 									?>
 								 	
@@ -145,17 +154,38 @@
 								<td >{{$order->distribution}}</td>
 								<td >{{$order->total_price}}</td>
 								<td >{{$order->code}}</td>
-								<td>
+								<td >
+									
 									<?php 
+									if(empty($order->time_created)){
 										$timestamp =  strtotime($order->created_at); 
 										$dt = new DateTime("@$timestamp");
 										echo $dt->format('d-m-Y');
+									}else{
+										$timestamp =  strtotime($order->time_created); 
+										$dt = new DateTime("@$timestamp");
+										echo $dt->format('d-m-Y');
+									}
+
 									?>
 
+
+
 								</td>
+								<td style="text-align: center;"><button class="btn btn-success btnDeleteOrder" data-id="{{$order->id}}">Xóa</button></td>
 							</tr>
 							@endforeach
 						</tbody>
+						<tfoot>
+							<tr>
+								<th>Sản phẩm</th>
+								<th>Nguồn bán</th>
+								<th>Thành tiền</th>
+								<th>Mã đơn hàng</th>
+								<th>Thời gian tạo</th>
+								<th></th>
+							</tr>
+						</tfoot>
 					</table>
 				</div>
 			</div>
@@ -178,6 +208,7 @@
 <script src="{{asset('app/assets/js/lib/data-table/buttons.colVis.min.js')}}"></script>
 <script src="{{asset('app/assets/js/lib/data-table/datatables-init.js')}}"></script>
 <script type="text/javascript">
+	
 	$(document).ready(function() {
 		$('[data-toggle="tooltip"]').tooltip();
 		$('.plus-product').click(function(){
@@ -216,12 +247,14 @@
 				var valCode = $('#codeOrder').val();
 				var valPrice = $('#totalPrice').val();
 				var valDistribute = $('#selectDistribute').val();
+				var valTimeCreate = $('#timeCreate').val();
 				
 
 				var dataPost= {
 					code:valCode,
 					price:valPrice,
 					distribute:valDistribute,
+					timeCreate:valTimeCreate,
 					productData:productData,
 				};
 
@@ -232,6 +265,28 @@
 					data: {
 						_token: CSRF_TOKEN,
 						dataPost:dataPost
+					},
+					dataType: 'JSON',
+					success:function(res){
+						setTimeout(function() {
+							location.reload()
+						},500);
+					}
+
+				});
+			}
+		});
+		$('.btnDeleteOrder').click(function(){
+			var productId = jQuery('.btnDeleteOrder').attr('data-id');
+			console.log(productId);
+			var r = confirm("Bạn chắc chắn muốn xóa!");
+			if (r == true) {
+				jQuery.ajax({
+					url: host+'/admin/deleteOrder',
+					method:'post',
+					data: {
+						_token: CSRF_TOKEN,
+						productId:productId
 					},
 					dataType: 'JSON',
 					success:function(res){
@@ -307,6 +362,7 @@ function messageResponce(message,type){
 		}
 	});
 }
+
 
 	
 </script>

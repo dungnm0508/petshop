@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Order;
 use App\Product;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 
 class StatisticController extends Controller
@@ -14,7 +15,18 @@ class StatisticController extends Controller
     	$orders = Order::all();
     	$products = Product::all();
     	$totalPrice = 0;	
+    	$months = Order::whereYear('time_created',date("Y"))->get()->groupBy(function($d) {
+    		return Carbon::parse($d->time_created)->format('m');
+    	});
+    	$revenueOfMoth = [];
+    	foreach ($months as $key => $month) {
+    		$revenue = 0;
+    		foreach ($month as  $order) {
+    			$revenue += $order['total_price'];
+    		}
 
+    		$revenueOfMoth[intval($key)] = $revenue;
+    	}
 
     	$array_data = [];
     	foreach ($orders as $key => $order) {
@@ -26,7 +38,10 @@ class StatisticController extends Controller
     			$data['quantity'] = $value['quantity'];
     			$array_data[] = $data;
     		}
+
     	}
+
+
     	$arr = array();
 
     	foreach ($array_data as $key => $item) {
@@ -47,7 +62,8 @@ class StatisticController extends Controller
 
     	}
 
-    	// return number_format($totalPrice);
-    	return view('layouts/admin/dashboard',compact('dataGroup','totalPrice'));
+
+
+    	return view('layouts/admin/dashboard',compact('dataGroup','totalPrice','orders','revenueOfMoth'));
     }
 }

@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Thống Kê</title>
-    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="description" content="Gautimshop admin - order management">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="{{asset('app/apple-icon.png')}}">
@@ -53,8 +53,8 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="./"><img src="{{asset('app/images/logo.png')}}" alt="Logo"></a>
-                <a class="navbar-brand hidden" href="./"><img src="{{asset('app/images/logo2.png')}}" alt="Logo"></a>
+                <a class="navbar-brand" href="./">Gấu tím shop</a>
+                <!-- <a class="navbar-brand hidden" href="./"><img src="{{asset('app/images/logo2.png')}}" alt="Logo"></a> -->
             </div>
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">

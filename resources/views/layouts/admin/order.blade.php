@@ -258,7 +258,6 @@
 					productData:productData,
 				};
 
-
 				jQuery.ajax({
 					url: host+'/admin/insertOrder',
 					method:'post',

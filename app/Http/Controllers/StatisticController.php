@@ -11,7 +11,7 @@ use Carbon\Carbon;
 
 class StatisticController extends Controller
 {
-    public function getDashboard(){
+    public function getDashboard(){ 
     	$orders = Order::all();
     	$products = Product::all();
     	$totalPrice = 0;	

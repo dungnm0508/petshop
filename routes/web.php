@@ -29,7 +29,7 @@ Route::get('logout',['as'=>'getLogout','uses'=>'AuthController@getLogout']);
 Route::get('dashboard',['as'=>'getDashboard','uses'=>'StatisticController@getDashboard'])->middleware('auth');
 
 
-Route::get('test',['uses'=>'ProductController@getProductTest']);
+
 
 //admin 
 
@@ -45,5 +45,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('orders',['as'=>'getOrder','uses'=>'OrderController@getOrder']);
 
     Route::post('insertOrder',['as'=>'postInsertOrder','uses'=>'OrderController@postInsertOrder']);
+
+    Route::get('warehouse',['as'=>'getWarehouse','uses'=>'WarehouseController@getWarehouse']);
+
+    Route::post('addOrder',['as'=>'postAddOrder','uses'=>'WarehouseController@postAddOrder']);
 
 });

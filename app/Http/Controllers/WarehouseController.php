@@ -13,6 +13,7 @@ class WarehouseController extends Controller
     public function getWarehouse(){
     	$products = Product::all();
     	$orders = DB::table('warehouse')->join('product','warehouse.product_id','=','product.id')->select('warehouse.*','product.name')->get();
+
     	return view('layouts/admin/warehouse',compact('products','orders'));
     }
     public function postAddOrder(Request $request){
@@ -23,6 +24,11 @@ class WarehouseController extends Controller
     	$order->status = 0;
     	$order->created_at = new Datetime;
     	$order->save();
+    	return redirect()->route('getWarehouse');
+    }
+    public function deleteArchive($id){
+    	$archive = Warehouse::find($id);
+    	$archive->delete();
     	return redirect()->route('getWarehouse');
     }
 }

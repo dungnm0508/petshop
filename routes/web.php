@@ -50,4 +50,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::post('addOrder',['as'=>'postAddOrder','uses'=>'WarehouseController@postAddOrder']);
 
+    Route::get('deleteArchive/{id}',['as'=>'postDeleteArchive','uses'=>'WarehouseController@deleteArchive']);
+
+    Route::get('changeStatus/{id}',['as'=>'getChangeStatus','uses'=>'WarehouseController@getChangeStatus']);
+
 });

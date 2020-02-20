@@ -9,7 +9,13 @@
 body {
     font-family: 'Roboto', sans-serif;
   }
-
+.title-status span{
+	margin-left: 10px;
+}
+.title-status i{
+	font-size: 22px;
+    margin-left: 3px;
+}
 
 
 
@@ -41,7 +47,7 @@ body {
     left: 0px;
     height: 24px;
     width: 24px;
-    background-color: transparent;
+    background-color: #00000021;
     border-radius: 5px;
     transition: all 0.3s ease-out;
     -webkit-transition: all 0.3s ease-out;
@@ -226,6 +232,7 @@ body {
 								<th>Số lượng nhập</th>
 								<th>Đơn vị</th>
 								<th>Trạng thái</th>
+								<th>Thời gian tạo</th>
 								<th>Xóa</th>
 							</tr>
 						</thead>
@@ -238,10 +245,11 @@ body {
 								<td>
 									@if($order->status == 0)
 										
-										<i class="fa fa-times-circle" style="color: #dc3545;" ></i> Chưa kiểm hàng
+										<div class="title-status"><i class="fa fa-times-circle" style="color: #dc3545;" ></i><span>Chưa kiểm hàng</span> </div>
+
 										<div class="form-group">
 											<div class="checkbox-container">
-
+											<meta name="csrf-token" content="{{ csrf_token() }}" />
 												<label class="checkbox-label">
 													<input type="checkbox" data-id='{{$order->id}}'>
 													<span class="checkbox-custom rectangular"></span>
@@ -254,10 +262,11 @@ body {
 										
 
 									@else
-										<i class="fa fa-check-circle-o " style="color:#218838;"></i> Đã kiểm hàng
+										<div class="title-status"><i class="fa fa-check-circle" style="color: #28a745;" ></i><span>Đã kiểm hàng</span> </div>
 									@endif
 
 								</td>
+								<td><?php echo date("d-m-y", strtotime($order->created_at));  ?></td>
 								<td>
 									<form action="deleteArchive/{{$order->id}}" method="get">
 										@csrf
@@ -291,8 +300,29 @@ body {
 <script src="{{asset('app/assets/js/lib/data-table/datatables-init.js')}}"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 		$('.checkbox-label input[type="checkbox"]').click(function(e){
-			console.log(e.target);
+			var inputCheck = e.target;
+			var orderId = $(e.target).attr('data-id');
+			var host = location.origin;
+			if(inputCheck.checked){
+				$.ajax({
+					url: host+'/admin/approve',
+					method:'post',
+					data: {
+						_token: CSRF_TOKEN,
+						id:orderId
+					},
+					dataType: 'JSON',
+					success:function(res){
+						$('.form-group').fadeOut();
+						$('.title-status i').removeClass('fa-times-circle');
+						$('.title-status i').addClass('fa-check-circle');
+						$('.title-status i').css('color','#28a745');
+						$('.title-status span').html('Đã kiểm hàng');
+					}
+				});
+			}
 		});
 	});
 </script>

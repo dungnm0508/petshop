@@ -54,4 +54,6 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::get('changeStatus/{id}',['as'=>'getChangeStatus','uses'=>'WarehouseController@getChangeStatus']);
 
+    Route::post('approve',['as'=>'postApprove','uses'=>'WarehouseController@postApprove']);
+
 });

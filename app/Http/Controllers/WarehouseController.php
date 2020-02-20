@@ -31,4 +31,11 @@ class WarehouseController extends Controller
     	$archive->delete();
     	return redirect()->route('getWarehouse');
     }
+    public function postApprove(Request $request){
+        $id = $request->id;
+        $order = Warehouse::find($id);
+        $order->status = 1;
+        $order->save();
+        return $order;
+    }
 }

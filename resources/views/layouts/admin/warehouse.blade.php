@@ -68,7 +68,7 @@
 						
 					</div>
 					<div class="card-submit">
-						<button type="submit" class="btn btn-primary btn-sm" id="btn-submit">
+						<button type="submit" class="btn btn-primary btn-sm" id="btn-submit" >
 							<i class="fa fa-dot-circle-o"></i> Thêm
 						</button>
 					</div>

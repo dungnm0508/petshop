@@ -7,6 +7,9 @@ use App\Order;
 use App\Product;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use PHPExcel; 
+use PHPExcel_IOFactory;
+use PHPExcel_Cell;
 
 
 class StatisticController extends Controller
@@ -66,4 +69,6 @@ class StatisticController extends Controller
 
     	return view('layouts/admin/dashboard',compact('dataGroup','totalPrice','orders','revenueOfMoth'));
     }
+
+    
 }

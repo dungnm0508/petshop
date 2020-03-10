@@ -25,8 +25,10 @@ Route::post('login',['uses'=>'AuthController@postLogin']);
 
 Route::get('logout',['as'=>'getLogout','uses'=>'AuthController@getLogout']);
 
-
 Route::get('dashboard',['as'=>'getDashboard','uses'=>'StatisticController@getDashboard'])->middleware('auth');
+
+Route::get('test',['as'=>'getTest','uses'=>'OrderController@test']);
+
 
 
 

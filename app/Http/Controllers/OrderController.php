@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Order;
 use App\Product;
 use DateTime;
+use PHPExcel; 
+use PHPExcel_IOFactory;
+use PHPExcel_Cell;
+
 
 class OrderController extends Controller
 {
@@ -37,5 +41,49 @@ class OrderController extends Controller
     	$order = Order::find($request->productId);
     	$order->delete();
     	return ['message'=>'Xóa sản phẩm thành công!'];
+    }
+    public function test($file = null){
+
+        $file = '../storage/file/shopee/test2.csv';
+
+        $objFile = PHPExcel_IOFactory::identify($file);
+        $objData = PHPExcel_IOFactory::createReader($objFile);
+
+        //Chỉ đọc dữ liệu
+        $objData->setReadDataOnly(true);
+
+        // Load dữ liệu sang dạng đối tượng
+        $objPHPExcel = $objData->load($file);
+
+        //Lấy ra số trang sử dụng phương thức getSheetCount();
+        // Lấy Ra tên trang sử dụng getSheetNames();
+
+        //Chọn trang cần truy xuất
+        $sheet = $objPHPExcel->setActiveSheetIndex(0);
+
+        //Lấy ra số dòng cuối cùng
+        $Totalrow = $sheet->getHighestRow();
+        //Lấy ra tên cột cuối cùng
+        $LastColumn = $sheet->getHighestColumn();
+
+        //Chuyển đổi tên cột đó về vị trí thứ, VD: C là 3,D là 4
+        $TotalCol = PHPExcel_Cell::columnIndexFromString($LastColumn);
+
+        //Tạo mảng chứa dữ liệu
+        $data = [];
+
+        //Tiến hành lặp qua từng ô dữ liệu
+        for ($i = 2; $i <= $Totalrow; $i++) {
+            for ($j = 0; $j < $TotalCol; $j++) {
+                $data[$i - 2][$j] = $sheet->getCellByColumnAndRow($j, $i)->getValue();;
+            }
+        }
+        $sum = 0;
+        foreach ($data as $key => $row) {
+            if($key>2){
+                $sum += (float)$row[11];
+            }
+        }
+        echo number_format($sum) ;
     }
 }

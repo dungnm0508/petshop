@@ -2,6 +2,7 @@
 
 @section('content')
 <?php 
+
 usort($dataGroup, function($a, $b) {
 	return $b['count'] - $a['count'];
 });
@@ -25,7 +26,7 @@ usort($dataGroup, function($a, $b) {
 				<div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
 				<div class="stat-content dib">
 					<div class="stat-text">Tổng Thu</div>
-					<div class="stat-digit">{{number_format($totalPrice*1000)}} VNĐ</div>
+					<div class="stat-digit">{{number_format($totalPrice)}} VNĐ</div>
 				</div>
 			</div>
 		</div>
@@ -38,7 +39,7 @@ usort($dataGroup, function($a, $b) {
 				<div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
 				<div class="stat-content dib">
 					<div class="stat-text">Tổng Đơn</div>
-					<div class="stat-digit">{{count($orders)}}</div>
+					<div class="stat-digit">{{$countOrder}}</div>
 				</div>
 			</div>
 		</div>
@@ -49,14 +50,20 @@ usort($dataGroup, function($a, $b) {
 		<div class="card-body">
 			<div class="stat-widget-one">
 				<div class="stat-icon dib"><i class="ti-cup text-warning border-warning"></i></div>
-				<div class="stat-content dib">
+				<div class="stat-lcontent dib">
 					<div class="stat-text">Sản phẩm bán chạy nhất (trừ xúc xích)</div>
 					<div class="stat-digit"><?php 
-					if($dataGroup[0]['product_name'] == 'Xúc Xích'){
-						echo $dataGroup[1]['product_name'];
-					}else{
-						echo $dataGroup[1]['product_name'];
+					if(!empty($dataGroup)){
+						if($dataGroup[0]['product_name'] == 'Xúc Xích'){
+							echo $dataGroup[1]['product_name'];
+						}else{
+							
+							echo $dataGroup[0]['product_name'];
+							
+							
+						}
 					}
+					
 					 ?></div>
 				</div>
 			</div>
@@ -67,10 +74,10 @@ usort($dataGroup, function($a, $b) {
 	<div class="card">
 		<div class="card-body">
 			<div class="stat-widget-one">
-				<div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
+				<div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
 				<div class="stat-content dib">
-					<div class="stat-text">Tổng Đơn</div>
-					<div class="stat-digit">{{count($orders)}}</div>
+					<div class="stat-text">Tổng Thu Shopee</div>
+					<div class="stat-digit">{{number_format($priceOrderShopee)}} VNĐ</div>
 				</div>
 			</div>
 		</div>
@@ -151,7 +158,10 @@ usort($dataGroup, function($a, $b) {
 	var listColor = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000'];
 
 	jQuery(document).ready(function() {
-		addPieChart(dataProduct,'#flot-pie');
+		if(dataProduct.length > 0){
+			addPieChart(dataProduct,'#flot-pie');
+
+		}
 		addBarChart();
 	});
 
@@ -215,7 +225,7 @@ usort($dataGroup, function($a, $b) {
 			labels: labels,
 			datasets: [
 			{
-				label: "Doanh thu theo tháng (x1000 VNĐ) ",
+				label: "Doanh thu theo tháng ",
 				data: dataRevenue,
 				borderColor: "rgba(0, 123, 255, 0.9)",
 				borderWidth: "0",

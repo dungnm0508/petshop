@@ -48,6 +48,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::post('insertOrder',['as'=>'postInsertOrder','uses'=>'OrderController@postInsertOrder']);
 
+    Route::post('importDataShopee',['as'=>'postImportDataShopee','uses'=>'OrderController@postImportDataShopee']);
+
     Route::get('warehouse',['as'=>'getWarehouse','uses'=>'WarehouseController@getWarehouse']);
 
     Route::post('addOrder',['as'=>'postAddOrder','uses'=>'WarehouseController@postAddOrder']);

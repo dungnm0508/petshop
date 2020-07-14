@@ -32,16 +32,23 @@ class StatisticController extends Controller
     	}
 
     	$array_data = [];
+        $countOrder = 0;
+        $priceOrderShopee = 0;
     	foreach ($orders as $key => $order) {
     		$totalPrice += $order->total_price;
     		$product_data = json_decode($order->product_data,true);
-    		foreach ($product_data as $value) {
-    			$data = [];
-    			$data['name'] = $value['productName'];
-    			$data['quantity'] = $value['quantity'];
-    			$array_data[] = $data;
-    		}
-
+            if($order->distribution == 1){
+                foreach ($product_data as $value) {
+                    $data = [];
+                    $data['name'] = $value['productName'];
+                    $data['quantity'] = $value['quantity'];
+                    $array_data[] = $data;
+                }
+                $countOrder++;
+            }else{
+                $priceOrderShopee += $order->total_price;
+                $countOrder += $product_data['countOrder'];
+            }
     	}
 
 
@@ -67,7 +74,7 @@ class StatisticController extends Controller
 
 
 
-    	return view('layouts/admin/dashboard',compact('dataGroup','totalPrice','orders','revenueOfMoth'));
+    	return view('layouts/admin/dashboard',compact('dataGroup','totalPrice','orders','revenueOfMoth','countOrder','priceOrderShopee'));
     }
 
     

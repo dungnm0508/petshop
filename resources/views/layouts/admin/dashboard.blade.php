@@ -133,19 +133,7 @@ usort($dataGroup, function($a, $b) {
 <!-- <script src="{{asset('app/assets/js/lib/flot-chart/flot-chart-init.js')}}"></script> -->
 <script src="{{asset('app/assets/js/lib/chart-js/Chart.bundle.js')}}"></script>
 <!-- <script src="{{asset('app/assets/js/lib/chart-js/chartjs-init.js')}}"></script> -->
-<script type="text/javascript">
-	jQuery(document).ready(function() {
-		var host = location.origin;
-		jQuery.ajax({
-			url: host+'/api/test',
-			method:'get',
-			success:function(res){
-				console.log(JSON.parse(res));
-				
-			}
-		});
-	});
-</script>
+
 
 <script type="text/javascript">
 	var dataProduct = <?php echo json_encode($dataGroup)?>;

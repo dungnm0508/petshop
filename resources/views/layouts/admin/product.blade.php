@@ -27,7 +27,7 @@
 <div class="animated fadeIn" >
 
 	<div class="row">
-		<div class="col-lg-12">
+		<!-- <div class="col-lg-12">
 			<div class="card ">
 				<div class="card-header">
 					<strong>Add</strong> Product
@@ -71,7 +71,7 @@
 					</button>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="col-lg-12">
 			<div class="card">
 				<div class="card-header">
@@ -82,9 +82,9 @@
 						<thead>
 							<tr>
 								<th>Tên sản phẩm</th>
-								<th>Loại sản phẩm</th>
+								<!-- <th>Loại sản phẩm</th>
 								<th>Giá</th>
-								<th>Khối lượng</th>
+								<th>Khối lượng</th> -->
 								<th>Xóa</th>
 								
 							</tr>
@@ -93,9 +93,6 @@
 							@foreach($products as $product)
 							<tr data-id="{{$product->id}}">
 								<td class="nameCol">{{$product->name}}</td>
-								<td class="typeCol">{{$product->type_product}}</td>
-								<td class="priceCol">{{$product->price}}</td>
-								<td class="weightCol">{{$product->weight}}</td>
 								<td><button class="btn btn-success btnDeleteProduct" data-id="{{$product->id}}">Xóa</button></td>
 							</tr>
 							@endforeach

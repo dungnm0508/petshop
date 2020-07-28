@@ -46,8 +46,19 @@ class StatisticController extends Controller
                 }
                 $countOrder++;
             }else{
+                $product_data = json_decode($order->product_data,true);
+                $countOrderShopee = 0;
+                foreach ($product_data['productData'] as $value) {
+                    $data = [];
+                    $data['name'] = $value['name'];
+                    $data['quantity'] = $value['countSales'];
+                    $countOrderShopee += $value['countOrder'];
+                    $array_data[] = $data;
+
+                }
                 $priceOrderShopee += $order->total_price;
-                $countOrder += $product_data['countOrder'];
+
+                $countOrder += $countOrderShopee;
             }
     	}
 

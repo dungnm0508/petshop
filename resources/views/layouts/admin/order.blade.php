@@ -146,7 +146,7 @@
 								<div class="row form-group">
 									<div class="col-lg-6">
 										<div class="col col-md-3"><label for="file-input" class=" form-control-label">File input</label></div>
-										<div class="col-12 col-md-9"><input type="file" accept=".csv"  id="file-shopee" name="fileShopee" class="form-control-file"></div>
+										<div class="col-12 col-md-9"><input type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"  id="file-shopee" name="fileShopee" class="form-control-file"></div>
 									</div>
 									
 								</div>
@@ -206,7 +206,10 @@
 											echo '<strong>'.$product_data[0]['productName'].'</strong> - số lượng: '.$product_data[0]['quantity'];
 										}
 									}else{
-										echo ' <strong>Số đơn: '.$product_data['countOrder'].'</strong><br> Từ ngày: '.$product_data['startDate'].' Đến ngày: '.$product_data['endDate'];
+										foreach ($product_data['productData'] as $key => $value) {
+											echo ' <strong>Sản phẩm: '.$value['name'].'</strong> sl: '.$value['countSales'].'<br>';
+										}
+										echo $product_data['rangeDate']['startDate'].' Đến ngày: '.$product_data['rangeDate']['endDate'];
 									}
 									
 									?>
@@ -223,7 +226,7 @@
 								<td >
 									
 									<?php 
-										$timeStamp = (int)$order->time_created;
+										$timeStamp = strtotime($order->time_created);
 										$dt = new DateTime("@$timeStamp");
 										echo $dt->format('d-m-Y');
 									?>

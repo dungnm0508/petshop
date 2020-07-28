@@ -203,11 +203,11 @@
 												echo '<strong>'.$value['productName'].'</strong> - sl: '.$value['quantity'].'<br>';
 											}
 										}else{
-											echo '<strong>'.$product_data[0]['productName'].'</strong> - số lượng: '.$product_data[0]['quantity'];
+											echo '<strong>'.$product_data[0]['productName'].'</strong> - sl: '.$product_data[0]['quantity'];
 										}
 									}else{
 										foreach ($product_data['productData'] as $key => $value) {
-											echo ' <strong>Sản phẩm: '.$value['name'].'</strong> sl: '.$value['countSales'].'<br>';
+											echo ' <strong>'.$value['name'].'</strong> - sl: '.$value['countSales'].'<br>';
 										}
 										echo $product_data['rangeDate']['startDate'].' Đến ngày: '.$product_data['rangeDate']['endDate'];
 									}

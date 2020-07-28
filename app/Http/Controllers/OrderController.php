@@ -36,7 +36,7 @@ class OrderController extends Controller
     	}else{
             $timestamp = strtotime($request->dataPost['timeCreate']);
         }
-        $dt = new DateTime("@$timeStamp");
+        $dt = new DateTime("@$timestamp");
         $order->time_created = $dt->format('Y-m-d');
     	$order->product_data= json_encode($request->dataPost['productData']);
     	$order->created_at = new Datetime;
